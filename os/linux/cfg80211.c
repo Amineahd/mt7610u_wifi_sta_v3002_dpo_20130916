@@ -300,7 +300,13 @@ Note:
 	For iw utility: set type, set monitor
 ========================================================================
 */
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,32))
+#if(LINUX_VERSION_CODE >= KERNEL_VERSION(4,12,0))
+static int CFG80211_OpsVirtualInfChg(
+	IN struct wiphy					*pWiphy,
+	IN struct net_device			*pNetDevIn,
+	IN enum nl80211_iftype			Type,
+	struct vif_params				*pParams)
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,32) && LINUX_VERSION_CODE < KERNEL_VERSION(4,12,0))
 static int CFG80211_OpsVirtualInfChg(
 	IN struct wiphy					*pWiphy,
 	IN struct net_device			*pNetDevIn,
@@ -351,20 +357,20 @@ static int CFG80211_OpsVirtualInfChg(
 
 	pNetDev->ieee80211_ptr->iftype = Type;
 
-	if (pFlags != NULL)
+	if (pParams->flags != NULL)
 	{
 		Filter = 0;
 
-		if (((*pFlags) & NL80211_MNTR_FLAG_FCSFAIL) == NL80211_MNTR_FLAG_FCSFAIL)
+		if (((pParams->flags) & NL80211_MNTR_FLAG_FCSFAIL) == NL80211_MNTR_FLAG_FCSFAIL)
 			Filter |= RT_CMD_80211_FILTER_FCSFAIL;
 
-		if (((*pFlags) & NL80211_MNTR_FLAG_FCSFAIL) == NL80211_MNTR_FLAG_PLCPFAIL)
+		if (((pParams->flags) & NL80211_MNTR_FLAG_FCSFAIL) == NL80211_MNTR_FLAG_PLCPFAIL)
 			Filter |= RT_CMD_80211_FILTER_PLCPFAIL;
 
-		if (((*pFlags) & NL80211_MNTR_FLAG_CONTROL) == NL80211_MNTR_FLAG_CONTROL)
+		if (((pParams->flags) & NL80211_MNTR_FLAG_CONTROL) == NL80211_MNTR_FLAG_CONTROL)
 			Filter |= RT_CMD_80211_FILTER_CONTROL;
 
-		if (((*pFlags) & NL80211_MNTR_FLAG_CONTROL) == NL80211_MNTR_FLAG_OTHER_BSS)
+		if (((pParams->flags) & NL80211_MNTR_FLAG_CONTROL) == NL80211_MNTR_FLAG_OTHER_BSS)
 			Filter |= RT_CMD_80211_FILTER_OTHER_BSS;
 	} /* End of if */
 
