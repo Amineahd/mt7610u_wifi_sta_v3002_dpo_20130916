@@ -1,3 +1,6 @@
+#changelog 2018-07-13
+Ported the driver to 4.16, compiles fine and able to connect to 5GHZ networks
+
 #changelog 2016-08-15
 1. changed IEEE80211_NUM_BANDS, IEEE80211_BAND_2GHZ and IEEE80211_BAND_5GHZ to NUM_NL80211_BANDS, NL80211_BAND_2GHZ and NL80211_BAND_5GHZ in include/cfg80211.h and os/linux/rt_linux.c 
 
