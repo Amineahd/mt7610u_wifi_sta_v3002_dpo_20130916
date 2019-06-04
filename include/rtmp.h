@@ -7115,7 +7115,7 @@ typedef struct GNU_PACKED _ieee80211_radiotap_header {
 					 */
 }ieee80211_radiotap_header ;
 
-enum ieee80211_radiotap_type {
+/*enum ieee80211_radiotap_type {
     IEEE80211_RADIOTAP_TSFT = 0,
     IEEE80211_RADIOTAP_FLAGS = 1,
     IEEE80211_RADIOTAP_RATE = 2,
@@ -7130,7 +7130,7 @@ enum ieee80211_radiotap_type {
     IEEE80211_RADIOTAP_ANTENNA = 11,
     IEEE80211_RADIOTAP_DB_ANTSIGNAL = 12,
     IEEE80211_RADIOTAP_DB_ANTNOISE = 13
-};
+};*/
 
 #define WLAN_RADIOTAP_PRESENT (			\
 	(1 << IEEE80211_RADIOTAP_TSFT)	|	\
